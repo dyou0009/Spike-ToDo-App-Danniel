@@ -1,8 +1,13 @@
 import { Meteor } from 'meteor/meteor';
 import { Link, LinksCollection } from '/imports/api/links';
+import { Task, TasksCollection } from '/imports/api/tasks';
 
 async function insertLink({ title, url }: Pick<Link, 'title' | 'url'>) {
   await LinksCollection.insertAsync({ title, url, createdAt: new Date() });
+}
+
+async function insertTask({ text }: Pick<Task, 'text'>) {
+  await TasksCollection.insertAsync({ text });
 }
 
 Meteor.startup(async () => {
@@ -33,5 +38,22 @@ Meteor.startup(async () => {
   // In order to be fetched in real-time to the clients
   Meteor.publish("links", function () {
     return LinksCollection.find();
+  });
+
+  // If the Tasks collection is empty, add some data.
+  if (await TasksCollection.find().countAsync() === 0) {
+    await insertTask({
+      text: 'Sample Task 1!',
+    });
+
+    await insertTask({
+      text: 'Sample Task 2!',
+    });
+  }
+
+  // We publish the entire Tasks collection to all clients.
+  // In order to be fetched in real-time to the clients
+  Meteor.publish("tasks", function () {
+    return TasksCollection.find();
   });
 });
