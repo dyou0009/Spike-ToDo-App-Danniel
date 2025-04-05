@@ -1,12 +1,13 @@
 import { Meteor } from 'meteor/meteor';
 import { Link, LinksCollection } from '/imports/api/links';
 import { Task, TasksCollection } from '/imports/api/tasks';
+import '/imports/api/tasksMethods';
 
 async function insertLink({ title, url }: Pick<Link, 'title' | 'url'>) {
   await LinksCollection.insertAsync({ title, url, createdAt: new Date() });
 }
 
-async function insertTask({ text }: Pick<Task, 'text'>) {
+export async function insertTask({ text }: Pick<Task, 'text'>) {
   await TasksCollection.insertAsync({ text });
 }
 
