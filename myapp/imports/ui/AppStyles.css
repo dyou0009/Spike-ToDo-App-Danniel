@@ -87,7 +87,6 @@ header {
   flex-grow: 1;
   box-sizing: border-box;
   padding: 10px 6px;
-  background: transparent;
   border: 1px solid #aaa;
   width: 100%;
   font-size: 1em;
