@@ -6,6 +6,7 @@ import { TaskComponent } from './TaskComponent';
 import { Task } from '../api/tasks';
 import { useTracker, useSubscribe } from 'meteor/react-meteor-data';
 import { TasksCollection } from '/imports/api/tasks';
+import './AppStyles.css'
 
 export const App = () => {
   const isLoading = useSubscribe("tasks");
