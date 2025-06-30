@@ -7,6 +7,7 @@ import { Task } from '../api/tasks';
 import { useTracker, useSubscribe } from 'meteor/react-meteor-data';
 import { TasksCollection } from '/imports/api/tasks';
 import './AppStyles.css'
+import { Chat } from "./Chat";
 
 export const App = () => {
   const isLoading = useSubscribe("tasks");
@@ -17,16 +18,21 @@ export const App = () => {
   }
 
   return (
-    <div>
+    <div className="app">
       <h1>Welcome to Meteor!</h1>
-      <TaskFormComponent />
-      <ul>
-        {tasks.map((task) => (
-          <TaskComponent key={task._id} task={task} />
-        ))}
-      </ul>
-      <Hello />
-      <Info />
+      <div className="main">
+        <TaskFormComponent />
+        <ul className="tasks">
+          {tasks.map((task) => (
+            <TaskComponent key={task._id} task={task} />
+          ))}
+        </ul>
+      </div>
+
+      {/* <Hello />
+      <Info /> */}
+
+      <Chat />
     </div>
   );
 };
